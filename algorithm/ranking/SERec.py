@@ -1,3 +1,4 @@
+from __future__ import division
 from baseclass.SocialRecommender import SocialRecommender
 from scipy.sparse import *
 from scipy import *
@@ -50,8 +51,36 @@ class SERec(SocialRecommender):
                 row.append(u)
                 col.append(i)
                 val.append(1)
+
+        count = 0
+        for (i, user1) in enumerate(row):
+            user1 = str(user1)
+            user2 = str(col[i])
+            totalFriends = self.getNumFriends(user1) + self.getNumFriends(user2)
+            numMutualFriends = self.getNumMutualFriends(user1, user2)
+            if numMutualFriends > 1:
+                count += 1
+            closeness = numMutualFriends / totalFriends * 100 if totalFriends != 0 else 1
+            # print('totalFriends: ' + str(totalFriends))
+            # print('numMutualFriends: ' + str(numMutualFriends))
+            # print('closeness: ' + str(closeness))
+            val[i] = closeness
+
+        print('num connections with mutual friends: ' + str(count) + ' out of ' + str(len(row)))
+
         self.T = csr_matrix((np.array(val), (np.array(row), np.array(col))), (self.num_users, self.num_users))
 
+    def getNumFriends(self, user):
+        return len(self.social.followees[user])
+
+    def getNumMutualFriends(self, user1, user2):
+        user1Friends = self.social.followees[user1]
+        user2Friends = self.social.followees[user2]
+        count = 1   # include each other
+        for friend in user1Friends:
+            if (friend in user2Friends):
+                count += 1
+        return count
 
     def buildModel(self):
         print 'training...'

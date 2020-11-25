@@ -202,7 +202,7 @@ class IterativeRecommender(Recommender):
         bp += 'Recall' + ':' + str(self.bestPerformance[1]['Recall']) + ' | '
         bp += 'F1' + ':' + str(self.bestPerformance[1]['F1']) + ' | '
         bp += 'MAP' + ':' + str(self.bestPerformance[1]['MAP']) + ' | '
-        bp += 'MDCG' + ':' + str(self.bestPerformance[1]['NDCG'])
+        bp += 'NDCG' + ':' + str(self.bestPerformance[1]['NDCG'])
         print '*Best Performance* '
         print 'iteration:',self.bestPerformance[0],bp
         print '-'*120
