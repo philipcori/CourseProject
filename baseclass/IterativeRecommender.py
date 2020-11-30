@@ -96,7 +96,7 @@ class IterativeRecommender(Recommender):
             measure = self.rating_performance()
             print '%s %s iteration %d: loss = %.4f, delta_loss = %.5f learning_Rate = %.5f %5s %5s' \
                   % (self.algorName, self.foldInfo, iter, self.loss, deltaLoss, self.lRate, measure[0].strip()[:11], measure[1].strip()[:12])
-        #check if converged
+        # check if converged
         cond = abs(deltaLoss) < 1e-3
         converged = cond
         if not converged:
@@ -119,7 +119,7 @@ class IterativeRecommender(Recommender):
     def ranking_performance(self,iteration):
         #for quick evaluation, we only rank 2000 items
         #results of 1000 users would be evaluated
-        N = 10
+        N = 100
         recList = {}
         testSample = {}
         for user in self.data.testSet_u:
@@ -191,7 +191,7 @@ class IterativeRecommender(Recommender):
                 performance[k]=float(v)
                 self.bestPerformance.append(performance)
         print '-'*120
-        print 'Quick Ranking Performance '+self.foldInfo+' (Top-10 Item Recommendation On 1000 sampled users)'
+        print 'Quick Ranking Performance '+self.foldInfo+' (Top-' + str(N) + ' Item Recommendation On 1000 sampled users)'
         measure = [m.strip() for m in measure[1:]]
         print '*Current Performance*'
         print 'iteration:',iteration,' | '.join(measure)

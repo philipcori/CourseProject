@@ -52,6 +52,7 @@ class SERec(SocialRecommender):
                 col.append(i)
                 val.append(1)
 
+        # recompute friend weights
         count = 0
         for (i, user1) in enumerate(row):
             user1 = str(user1)
@@ -61,10 +62,17 @@ class SERec(SocialRecommender):
             if numMutualFriends > 1:
                 count += 1
             closeness = numMutualFriends / totalFriends * 100 if totalFriends != 0 else 1
+
             # print('totalFriends: ' + str(totalFriends))
             # print('numMutualFriends: ' + str(numMutualFriends))
             # print('closeness: ' + str(closeness))
             val[i] = closeness
+
+        print('closeness mean: ' + str(np.mean(val)))
+        print('closeness median: ' + str(np.median(val)))
+        print('closeness stdev: ' + str(np.std(val)))
+        print('closeness min: ' + str(np.min(val)))
+        print('closeness max: ' + str(np.max(val)))
 
         print('num connections with mutual friends: ' + str(count) + ' out of ' + str(len(row)))
 
