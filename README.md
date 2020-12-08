@@ -11,7 +11,7 @@ For information about the implementation and architecture of the entire RecQ sys
 2. Create a new miniconda environment with Python 2.7
 3. Run `conda install mkl-source`
 4. Clone this repository
-5. Activate the environment and install dependencies with `pip install -r requirements`
+5. Activate the environment and install dependencies with `conda install --file requirements.txt`
 6. Run `python main.py`
 7. Follow the prompt and entire the desired algorithm to run
 
