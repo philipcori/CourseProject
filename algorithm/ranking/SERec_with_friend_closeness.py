@@ -12,19 +12,20 @@ EPS = 1e-8
 # #########----  Collaborative Filtering with Social Exposure: A Modular Approach to Social Recommendation   ----#############
 # SEREC_boost
 
-class SERec(SocialRecommender):
+# noinspection PyAttributeOutsideInit
+class SERec_with_friend_closeness(SocialRecommender):
     def __init__(self,conf,trainingSet=None,testSet=None,relation=None,fold='[1]'):
-        super(SERec, self).__init__(conf,trainingSet,testSet,relation,fold)
+        super(SERec_with_friend_closeness, self).__init__(conf,trainingSet,testSet,relation,fold)
 
     def initModel(self):
-        super(SERec, self).initModel()
+        super(SERec_with_friend_closeness, self).initModel()
         self.lam_theta = .01
         self.lam_beta = .01
         self.lam_y = 0.01
         self.init_mu = 0.01
         self.a = 1.0
         self.b = 99.0
-        self.s= 5
+        self.s = 5
         self.init_std = 0.5
         self.theta = self.init_std * \
             np.random.randn(self.num_users, self.embed_size).astype(np.float32)
@@ -52,7 +53,42 @@ class SERec(SocialRecommender):
                 col.append(i)
                 val.append(1)
 
+        # recompute friend weights
+        count = 0
+        for (i, user1) in enumerate(row):
+            user1 = str(user1)
+            user2 = str(col[i])
+            totalFriends = self.getNumFriends(user1) + self.getNumFriends(user2)
+            numMutualFriends = self.getNumMutualFriends(user1, user2)
+            if numMutualFriends > 1:
+                count += 1
+            # closeness = numMutualFriends / totalFriends * 10 if totalFriends != 0 else 1
+            closeness = math.log(numMutualFriends / totalFriends * 10 + 1, 2) if totalFriends != 0 else 1
+            # closeness = numMutualFriends ** 2 / totalFriends * 100 if totalFriends != 0 else 1
+            val[i] = closeness
+
+
+        print('closeness mean: ' + str(np.mean(val)))
+        print('closeness median: ' + str(np.median(val)))
+        print('closeness stdev: ' + str(np.std(val)))
+        print('closeness min: ' + str(np.min(val)))
+        print('closeness max: ' + str(np.max(val)))
+
+        print('num connections with mutual friends: ' + str(count) + ' out of ' + str(len(row)))
+
         self.T = csr_matrix((np.array(val), (np.array(row), np.array(col))), (self.num_users, self.num_users))
+
+    def getNumFriends(self, user):
+        return len(self.social.followees[user])
+
+    def getNumMutualFriends(self, user1, user2):
+        user1Friends = self.social.followees[user1]
+        user2Friends = self.social.followees[user2]
+        count = 1   # include each other
+        for friend in user1Friends:
+            if (friend in user2Friends):
+                count += 1
+        return count
 
     def buildModel(self):
         print 'training...'
