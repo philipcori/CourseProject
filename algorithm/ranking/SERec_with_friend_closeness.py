@@ -62,11 +62,12 @@ class SERec_with_friend_closeness(SocialRecommender):
             numMutualFriends = self.getNumMutualFriends(user1, user2)
             if numMutualFriends > 1:
                 count += 1
-            # closeness = numMutualFriends / totalFriends * 10 if totalFriends != 0 else 1
-            closeness = math.log(numMutualFriends / totalFriends * 10 + 1, 2) if totalFriends != 0 else 1
-            # closeness = numMutualFriends ** 2 / totalFriends * 100 if totalFriends != 0 else 1
-            val[i] = closeness
 
+            # 3 different closeness measures discussed in the Documentation
+            # closeness = numMutualFriends / totalFriends * 10 if totalFriends != 0 else 1
+            # closeness = numMutualFriends ** 2 / totalFriends * 10 if totalFriends != 0 else 1
+            closeness = math.log(numMutualFriends / totalFriends * 10 + 1, 2) if totalFriends != 0 else 1
+            val[i] = closeness
 
         print('closeness mean: ' + str(np.mean(val)))
         print('closeness median: ' + str(np.median(val)))
