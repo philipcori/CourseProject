@@ -21,7 +21,9 @@ if __name__ == '__main__':
     print 'Social Recommenders:'
     print 's1. RSTE          s2. SoRec         s3. SoReg         s4. SocialMF       s5. SBPR'
     print 's6. SREE          s7. LOCABAL       s8. SocialFD      s9. TBPR           s10. SERec'
+    
     print 's11. SERec_with_friend_closeness'
+    print 's12. SERecBoostAug'
 
     print 'Network Embedding based Recommenders:'
     print 'a1. CoFactor      a2. CUNE-MF       a3. CUNE-BPR      a4. IF-BPR'
@@ -45,8 +47,11 @@ if __name__ == '__main__':
     algorthms = {'1':'UserKNN','2':'ItemKNN','3':'BasicMF','4':'SlopeOne','5':'SVD','6':'PMF',
                  '7':'SVD++','8':'EE','9':'BPR','10':'WRMF','11':'ExpoMF',
                  's1':'RSTE','s2':'SoRec','s3':'SoReg','s4':'SocialMF','s5':'SBPR','s6':'SREE',
-                 's7':'LOCABAL','s8':'SocialFD','s9':'TBPR','s10':'SEREC','s11':'SEREC_with_friend_closeness', 'a1':'CoFactor',
-                 'a2':'CUNE_MF','a3':'CUNE_BPR','a4':'IF_BPR',
+                 's7':'LOCABAL','s8':'SocialFD','s9':'TBPR',
+                 's10':'SEREC',
+                 's11':'SEREC_with_friend_closeness', 
+                 's12':'SERecBoostAug',
+                 'a1':'CoFactor','a2':'CUNE_MF','a3':'CUNE_BPR','a4':'IF_BPR',
                  'd1':'APR','d2':'CDAE','d3':'DMF','d4':'NeuMF','d5':'CFGAN','d6':'IRGAN','d7':'RSGAN','d8':'NGCF',
                  'd9':'LightGCN', 'd10':'ESRF', 'd11':'DHCF', 'd12':'DiffNet',
                  'b1':'UserMean','b2':'ItemMean','b3':'MostPopular','b4':'Rand'}
