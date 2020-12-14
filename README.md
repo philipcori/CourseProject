@@ -1,7 +1,9 @@
 <h1>Course Project</h1>
-![Project Documentation](https://github.com/philipcori/CourseProject/blob/main/ProjectDocumentation.pdf)
+<h2>Project Documentation</h2>
+<p>https://github.com/philipcori/CourseProject/blob/main/ProjectDocumentation.pdf</p>
 
-![Project Presentation](https://www.youtube.com/watch?v=U2XECocV8fU&feature=youtu.be)
+<h2>Project Presentation</h2>
+<p>https://www.youtube.com/watch?v=U2XECocV8fU&feature=youtu.be</p>
 
 <h1>RecQ</h1>
 <h2>Introduction</h2>
