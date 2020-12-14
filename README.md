@@ -1,3 +1,8 @@
+<h1>Course Project</h1>
+![Project Documentation](https://github.com/philipcori/CourseProject/blob/main/ProjectDocumentation.pdf)
+
+![Project Presentation](https://www.youtube.com/watch?v=U2XECocV8fU&feature=youtu.be)
+
 <h1>RecQ</h1>
 <h2>Introduction</h2>
 
